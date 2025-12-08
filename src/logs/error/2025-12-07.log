@@ -1,0 +1,36 @@
+2025-12-07 14:08:44 error: uncaughtException: refresh is not defined
+ReferenceError: refresh is not defined
+    at Object.<anonymous> (D:\BMU\PORTAL BMU\BE\src\routes\details\auth.ts:8:29)
+    at Module.<anonymous> (node:internal/modules/cjs/loader:1688:14)
+    at Module._compile (D:\BMU\PORTAL BMU\BE\node_modules\source-map-support\source-map-support.js:521:25)
+    at Module.m._compile (C:\Users\DWIAJU~1\AppData\Local\Temp\ts-node-dev-hook-39476521381471286.js:69:33)
+    at node:internal/modules/cjs/loader:1820:10
+    at require.extensions..jsx.require.extensions..js (C:\Users\DWIAJU~1\AppData\Local\Temp\ts-node-dev-hook-39476521381471286.js:114:20)
+    at require.extensions.<computed> (C:\Users\DWIAJU~1\AppData\Local\Temp\ts-node-dev-hook-39476521381471286.js:71:20)
+    at Object.nodeDevHook [as .ts] (D:\BMU\PORTAL BMU\BE\node_modules\ts-node-dev\lib\hook.js:63:13)
+    at Module.load (node:internal/modules/cjs/loader:1423:32)
+    at Function._load (node:internal/modules/cjs/loader:1246:12)
+2025-12-07 14:09:22 error: uncaughtException: refresh is not defined
+ReferenceError: refresh is not defined
+    at Object.<anonymous> (D:\BMU\PORTAL BMU\BE\src\routes\details\auth.ts:8:29)
+    at Module.<anonymous> (node:internal/modules/cjs/loader:1688:14)
+    at Module._compile (D:\BMU\PORTAL BMU\BE\node_modules\source-map-support\source-map-support.js:521:25)
+    at Module.m._compile (C:\Users\DWIAJU~1\AppData\Local\Temp\ts-node-dev-hook-39476521381471286.js:69:33)
+    at node:internal/modules/cjs/loader:1820:10
+    at require.extensions..jsx.require.extensions..js (C:\Users\DWIAJU~1\AppData\Local\Temp\ts-node-dev-hook-39476521381471286.js:114:20)
+    at require.extensions.<computed> (C:\Users\DWIAJU~1\AppData\Local\Temp\ts-node-dev-hook-39476521381471286.js:71:20)
+    at Object.nodeDevHook [as .ts] (D:\BMU\PORTAL BMU\BE\node_modules\ts-node-dev\lib\hook.js:63:13)
+    at Module.load (node:internal/modules/cjs/loader:1423:32)
+    at Function._load (node:internal/modules/cjs/loader:1246:12)
+2025-12-07 14:09:26 error: uncaughtException: refresh is not defined
+ReferenceError: refresh is not defined
+    at Object.<anonymous> (D:\BMU\PORTAL BMU\BE\src\routes\details\auth.ts:8:29)
+    at Module.<anonymous> (node:internal/modules/cjs/loader:1688:14)
+    at Module._compile (D:\BMU\PORTAL BMU\BE\node_modules\source-map-support\source-map-support.js:521:25)
+    at Module.m._compile (C:\Users\DWIAJU~1\AppData\Local\Temp\ts-node-dev-hook-39476521381471286.js:69:33)
+    at node:internal/modules/cjs/loader:1820:10
+    at require.extensions..jsx.require.extensions..js (C:\Users\DWIAJU~1\AppData\Local\Temp\ts-node-dev-hook-39476521381471286.js:114:20)
+    at require.extensions.<computed> (C:\Users\DWIAJU~1\AppData\Local\Temp\ts-node-dev-hook-39476521381471286.js:71:20)
+    at Object.nodeDevHook [as .ts] (D:\BMU\PORTAL BMU\BE\node_modules\ts-node-dev\lib\hook.js:63:13)
+    at Module.load (node:internal/modules/cjs/loader:1423:32)
+    at Function._load (node:internal/modules/cjs/loader:1246:12)

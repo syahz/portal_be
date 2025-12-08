@@ -1,0 +1,117 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+}
+
+// 1. DATA MASTER ORGANISASI
+model Role {
+  id    String @id @default(uuid())
+  name  String @unique // "Admin", "Staff", "Manager"
+  users User[]
+
+  @@map("roles")
+}
+
+model Unit {
+  id    String @id @default(uuid())
+  code  String @unique // "UBC", "HO"
+  name  String
+  users User[]
+
+  @@map("units")
+}
+
+model Division {
+  id    String @id @default(uuid())
+  name  String @unique // "IT", "Finance"
+  users User[]
+
+  @@map("divisions")
+}
+
+// 2. DATA USER (GLOBAL)
+model User {
+  id           String    @id @default(uuid())
+  email        String    @unique
+  password     String    // Password asli di sini
+  name         String
+  failedLogins  Int            @default(0)
+  isLocked      Boolean        @default(false)
+  
+  
+  roleId       String
+  unitId       String
+  divisionId   String
+
+  role         Role      @relation(fields: [roleId], references: [id])
+  unit         Unit      @relation(fields: [unitId], references: [id])
+  division     Division  @relation(fields: [divisionId], references: [id])
+  // Relasi: User ini boleh akses aplikasi apa saja?
+  allowedApps  UserAppAccess[]
+  
+  // Untuk proses login SSO
+  authCodes    AuthCode[]
+  refreshTokens RefreshToken[]
+
+  @@map("users")
+}
+
+// 3. DAFTAR APLIKASI (Feedback, HR, Procurement)
+model ClientApp {
+  id           String   @id @default(uuid())
+  name         String   // "Feedback System"
+  description  String?
+  logoUrl      String?
+  
+  // Kredensial OAuth
+  clientId     String   @unique // "app_feedback"
+  clientSecret String   // "secret_key_feedback"
+  redirectUri  String   // "http://feedback.brawijaya.../api/auth/callback"
+  dashboardUrl String   // "http://feedback.brawijaya.../dashboard" (Link saat diklik di dashboard portal)
+
+  accessibleBy UserAppAccess[]
+
+  @@map("clients_app")
+}
+
+// 4. TABEL PENGHUBUNG (PIVOT) USER <-> APP
+model UserAppAccess {
+  id        String    @id @default(uuid())
+  userId    String
+  appId     String
+  
+  user      User      @relation(fields: [userId], references: [id])
+  app       ClientApp @relation(fields: [appId], references: [id])
+
+  @@unique([userId, appId]) // Mencegah duplikasi hak akses
+
+  @@map("user_app_access")
+}
+
+// 5. OAUTH FLOW
+model AuthCode {
+  code        String   @id @unique
+  userId      String
+  clientId    String
+  expiresAt   DateTime
+  
+  user        User     @relation(fields: [userId], references: [id])
+
+  @@map("auth_codes")
+}
+
+model RefreshToken {
+  id         String   @id @default(uuid())
+  user       User     @relation(fields: [userId], references: [id])
+  userId     String
+  tokenHash  String   @unique
+  revoked    Boolean  @default(false)
+  replacedBy String?
+  createdAt  DateTime @default(now())
+  expiresAt  DateTime
+
+  @@map("refresh_tokens")
+}
