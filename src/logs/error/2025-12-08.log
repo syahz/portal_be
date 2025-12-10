@@ -1,0 +1,64 @@
+2025-12-08 13:57:25 error: uncaughtException: Identifier 'res' has already been declared
+D:\BMU\PORTAL BMU\BE\src\controller\auth-controller.ts:18
+    const res = await (0, auth_services_1.authorizeUser)(request, portal_session, res);
+          ^
+
+SyntaxError: Identifier 'res' has already been declared
+    at wrapSafe (node:internal/modules/cjs/loader:1620:18)
+    at Module.<anonymous> (node:internal/modules/cjs/loader:1662:20)
+    at Module._compile (D:\BMU\PORTAL BMU\BE\node_modules\source-map-support\source-map-support.js:521:25)
+    at Module.m._compile (C:\Users\DWIAJU~1\AppData\Local\Temp\ts-node-dev-hook-12544744138364705.js:69:33)
+    at node:internal/modules/cjs/loader:1820:10
+    at require.extensions..jsx.require.extensions..js (C:\Users\DWIAJU~1\AppData\Local\Temp\ts-node-dev-hook-12544744138364705.js:114:20)
+    at require.extensions.<computed> (C:\Users\DWIAJU~1\AppData\Local\Temp\ts-node-dev-hook-12544744138364705.js:71:20)
+    at Object.nodeDevHook [as .ts] (D:\BMU\PORTAL BMU\BE\node_modules\ts-node-dev\lib\hook.js:63:13)
+    at Module.load (node:internal/modules/cjs/loader:1423:32)
+    at Function._load (node:internal/modules/cjs/loader:1246:12)
+2025-12-08 13:57:29 error: uncaughtException: Identifier 'res' has already been declared
+D:\BMU\PORTAL BMU\BE\src\controller\auth-controller.ts:18
+    const res = await (0, auth_services_1.authorizeUser)(request, portal_session, res);
+          ^
+
+SyntaxError: Identifier 'res' has already been declared
+    at wrapSafe (node:internal/modules/cjs/loader:1620:18)
+    at Module.<anonymous> (node:internal/modules/cjs/loader:1662:20)
+    at Module._compile (D:\BMU\PORTAL BMU\BE\node_modules\source-map-support\source-map-support.js:521:25)
+    at Module.m._compile (C:\Users\DWIAJU~1\AppData\Local\Temp\ts-node-dev-hook-12544744138364705.js:69:33)
+    at node:internal/modules/cjs/loader:1820:10
+    at require.extensions..jsx.require.extensions..js (C:\Users\DWIAJU~1\AppData\Local\Temp\ts-node-dev-hook-12544744138364705.js:114:20)
+    at require.extensions.<computed> (C:\Users\DWIAJU~1\AppData\Local\Temp\ts-node-dev-hook-12544744138364705.js:71:20)
+    at Object.nodeDevHook [as .ts] (D:\BMU\PORTAL BMU\BE\node_modules\ts-node-dev\lib\hook.js:63:13)
+    at Module.load (node:internal/modules/cjs/loader:1423:32)
+    at Function._load (node:internal/modules/cjs/loader:1246:12)
+2025-12-08 13:57:37 error: uncaughtException: Identifier 'res' has already been declared
+D:\BMU\PORTAL BMU\BE\src\controller\auth-controller.ts:18
+    const res = await (0, auth_services_1.authorizeUser)(request, portal_session, res);
+          ^
+
+SyntaxError: Identifier 'res' has already been declared
+    at wrapSafe (node:internal/modules/cjs/loader:1620:18)
+    at Module.<anonymous> (node:internal/modules/cjs/loader:1662:20)
+    at Module._compile (D:\BMU\PORTAL BMU\BE\node_modules\source-map-support\source-map-support.js:521:25)
+    at Module.m._compile (C:\Users\DWIAJU~1\AppData\Local\Temp\ts-node-dev-hook-12544744138364705.js:69:33)
+    at node:internal/modules/cjs/loader:1820:10
+    at require.extensions..jsx.require.extensions..js (C:\Users\DWIAJU~1\AppData\Local\Temp\ts-node-dev-hook-12544744138364705.js:114:20)
+    at require.extensions.<computed> (C:\Users\DWIAJU~1\AppData\Local\Temp\ts-node-dev-hook-12544744138364705.js:71:20)
+    at Object.nodeDevHook [as .ts] (D:\BMU\PORTAL BMU\BE\node_modules\ts-node-dev\lib\hook.js:63:13)
+    at Module.load (node:internal/modules/cjs/loader:1423:32)
+    at Function._load (node:internal/modules/cjs/loader:1246:12)
+2025-12-08 13:57:43 error: uncaughtException: Identifier 'res' has already been declared
+D:\BMU\PORTAL BMU\BE\src\controller\auth-controller.ts:18
+    const res = await (0, auth_services_1.authorizeUser)(request, portal_session, res);
+          ^
+
+SyntaxError: Identifier 'res' has already been declared
+    at wrapSafe (node:internal/modules/cjs/loader:1620:18)
+    at Module.<anonymous> (node:internal/modules/cjs/loader:1662:20)
+    at Module._compile (D:\BMU\PORTAL BMU\BE\node_modules\source-map-support\source-map-support.js:521:25)
+    at Module.m._compile (C:\Users\DWIAJU~1\AppData\Local\Temp\ts-node-dev-hook-12544744138364705.js:69:33)
+    at node:internal/modules/cjs/loader:1820:10
+    at require.extensions..jsx.require.extensions..js (C:\Users\DWIAJU~1\AppData\Local\Temp\ts-node-dev-hook-12544744138364705.js:114:20)
+    at require.extensions.<computed> (C:\Users\DWIAJU~1\AppData\Local\Temp\ts-node-dev-hook-12544744138364705.js:71:20)
+    at Object.nodeDevHook [as .ts] (D:\BMU\PORTAL BMU\BE\node_modules\ts-node-dev\lib\hook.js:63:13)
+    at Module.load (node:internal/modules/cjs/loader:1423:32)
+    at Function._load (node:internal/modules/cjs/loader:1246:12)

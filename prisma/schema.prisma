@@ -63,8 +63,7 @@ model User {
 model ClientApp {
   id           String   @id @default(uuid())
   name         String   // "Feedback System"
-  description  String?
-  logoUrl      String?
+  description  String
   
   // Kredensial OAuth
   clientId     String   @unique // "app_feedback"

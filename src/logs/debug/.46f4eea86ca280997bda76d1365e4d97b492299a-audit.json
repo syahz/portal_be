@@ -19,6 +19,16 @@
             "date": 1765126880417,
             "name": "D:\\BMU\\PORTAL BMU\\BE\\src\\logs\\debug\\2025-12-08.log",
             "hash": "3a6027599d3d9e5701caa817a26ae543f322eb3b6033ae9a48b9c9c4c4bb3988"
+        },
+        {
+            "date": 1765242538040,
+            "name": "D:\\BMU\\PORTAL BMU\\BE\\src\\logs\\debug\\2025-12-09.log",
+            "hash": "1810584acfd1a40037edac94ff9fd516323d474cb81a820f59bf2829ef7d7b35"
+        },
+        {
+            "date": 1765328549773,
+            "name": "D:\\BMU\\PORTAL BMU\\BE\\src\\logs\\debug\\2025-12-10.log",
+            "hash": "c873c22f8730f564f109383db6b65de6115d6f438e004432eaed9aef49817e5d"
         }
     ],
     "hashType": "sha256"

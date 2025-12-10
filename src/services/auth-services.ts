@@ -296,6 +296,8 @@ export const logoutAuth = async (rt: string | undefined, res: Response) => {
     }
     res.clearCookie('user_role', { path: '/' })
     if (COOKIE_DOMAIN) res.clearCookie('user_role', { path: '/', domain: COOKIE_DOMAIN })
+    res.clearCookie('user_division', { path: '/' })
+    if (COOKIE_DOMAIN) res.clearCookie('user_division', { path: '/', domain: COOKIE_DOMAIN })
   }
   return { ok: true }
 }
@@ -330,19 +332,6 @@ function cookieOptions() {
     path: '/'
   }
   // })
-}
-
-function cookieOptionsGoogleCallback() {
-  // Cross-site redirect callback requires SameSite=None and secure
-  return withDomain({
-    // return {
-    httpOnly: true,
-    secure: true,
-    sameSite: 'none' as const,
-    maxAge: REFRESH_EXPIRES_SECONDS * 1000,
-    path: '/'
-    // }
-  })
 }
 
 function nonHttpOnlyCookieOptions() {
