@@ -68,7 +68,6 @@ const clientAppsToSeed = [
   {
     name: 'Feedback System',
     description: 'Internal feedback portal application',
-    logoUrl: null,
     clientId: 'app_feedback',
     clientSecret: 'secret_key_feedback',
     redirectUri: 'http://localhost:3000/api/auth/callback',
@@ -126,7 +125,6 @@ async function seedClientApps() {
       update: {
         name: appData.name,
         description: appData.description,
-        logoUrl: appData.logoUrl,
         clientSecret: appData.clientSecret,
         redirectUri: appData.redirectUri,
         dashboardUrl: appData.dashboardUrl
@@ -134,7 +132,6 @@ async function seedClientApps() {
       create: {
         name: appData.name,
         description: appData.description,
-        logoUrl: appData.logoUrl,
         clientId: appData.clientId,
         clientSecret: appData.clientSecret,
         redirectUri: appData.redirectUri,
