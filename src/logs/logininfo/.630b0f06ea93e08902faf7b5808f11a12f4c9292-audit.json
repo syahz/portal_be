@@ -1,0 +1,20 @@
+{
+    "keep": {
+        "days": false,
+        "amount": 5
+    },
+    "auditLog": "D:\\BMU\\PORTAL BMU\\BE\\src\\logs\\logininfo\\.630b0f06ea93e08902faf7b5808f11a12f4c9292-audit.json",
+    "files": [
+        {
+            "date": 1765440946409,
+            "name": "D:\\BMU\\PORTAL BMU\\BE\\src\\logs\\logininfo\\2025-12-11.log",
+            "hash": "66808527d91a9b78cd8459ec662c9f206994ea2a520c0473da93d60d0d1f6e1a"
+        },
+        {
+            "date": 1765503939132,
+            "name": "D:\\BMU\\PORTAL BMU\\BE\\src\\logs\\logininfo\\2025-12-12.log",
+            "hash": "e70257d7b4623e542d211adcddc6742e0768e68a78d4a59dbed04432bbd3b8a3"
+        }
+    ],
+    "hashType": "sha256"
+}

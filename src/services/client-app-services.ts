@@ -73,7 +73,17 @@ export const updateClientApp = async (appId: string, request: UpdateClientAppReq
     }
   }
 
-  const updated = await prismaClient.clientApp.update({ where: { id: appId }, data: updateRequest })
+  const updated = await prismaClient.clientApp.update({
+    where: { id: appId },
+    data: {
+      clientId: updateRequest.client_id,
+      clientSecret: updateRequest.client_secret,
+      name: updateRequest.name,
+      description: updateRequest.description,
+      redirectUri: updateRequest.redirect_uri,
+      dashboardUrl: updateRequest.dashboard_url
+    }
+  })
   return toClientAppResponse(updated)
 }
 
