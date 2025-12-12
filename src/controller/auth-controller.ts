@@ -12,7 +12,7 @@ export const authorize = async (req: Request, res: Response) => {
     // Jika belum login, redirect ke halaman login frontend portal
     // Kita kirim parameter returnUrl agar setelah login bisa balik ke flow ini
     const returnUrl = encodeURIComponent(
-      `http://localhost:4000/api/auth/authorize?client_id=${request.client_id}&redirect_uri=${request.redirect_uri}`
+      `https://api.portal.bmuconnect.id/api/auth/authorize?client_id=${request.client_id}&redirect_uri=${request.redirect_uri}`
     )
     return res.redirect(`${process.env.PORTAL_FRONTEND_URL}/login?returnUrl=${returnUrl}`)
   }
