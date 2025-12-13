@@ -126,7 +126,9 @@ export const tokenExchange = async (request: UserTokenExchangeRequest) => {
       clientId: request.client_id
     }
   })
-  if (!app || app.clientSecret !== request.client_secret) return new ResponseError(401, 'Unauthorized Client')
+  if (!app || app.clientSecret !== request.client_secret) {
+    throw new ResponseError(401, 'Unauthorized Client')
+  }
   // Validasi Code
   const authCode = await prismaClient.authCode.findUnique({
     where: { code: request.code },
