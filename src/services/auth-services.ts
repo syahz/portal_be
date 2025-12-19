@@ -130,7 +130,7 @@ export const loginGoogleAuth = async (user: User, res: Response) => {
   const csrfToken = csrfEnabled ? createSessionToken().slice(0, 32) : null
 
   //Set Cookies refresh token
-  res.cookie('refresh_token', refreshPlain, cookieOptions())
+  res.cookie('refresh_token', refreshPlain, cookieOptionsGoogleCallback())
   // Set user role cookie
   res.cookie('user_role', role, nonHttpOnlyCookieOptions())
   // Set user unit cookie
@@ -153,7 +153,7 @@ export const loginGoogleAuth = async (user: User, res: Response) => {
   }
   // Portal session cookie for SSO
   const PortalSessiontoken = signPortalSession({ userId: user.id, role, unit, division })
-  res.cookie('portal_session', PortalSessiontoken, cookieOptions())
+  res.cookie('portal_session', PortalSessiontoken, cookieOptionsGoogleCallback())
 
   return {
     portal_session: PortalSessiontoken,
