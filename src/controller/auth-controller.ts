@@ -1,7 +1,9 @@
+import { logger } from '../utils/logger'
 import { Request, Response } from 'express'
+import requestIp from 'request-ip'
+import { Role, Unit, User } from '@prisma/client'
 import { UserAuthorizeRequest, UserLoginRequest, UserTokenExchangeRequest } from '../models/auth-model'
-import { authorizeUser, loginAuth, logoutAuth, refreshAuth, tokenExchange } from '../services/auth-services'
-
+import { authorizeUser, loginAuth, loginGoogleAuth, logoutAuth, refreshAuth, tokenExchange } from '../services/auth-services'
 // 1. HALAMAN LOGIN & SSO REDIRECT (GET /oauth/authorize)
 export const authorize = async (req: Request, res: Response) => {
   const request: UserAuthorizeRequest = req.query as UserAuthorizeRequest
@@ -27,10 +29,33 @@ export const login = async (req: Request, res: Response) => {
   const request: UserLoginRequest = req.body as UserLoginRequest
 
   const response = await loginAuth(request, res)
-
+  // ============================
+  const ip = requestIp.getClientIp(req)
+  const userAgent = req.get('User-Agent') || 'unknown'
+  logger.info(`Google login successful for user: ${response.user.email}. IP: ${ip}, User-Agent: ${userAgent}`)
   res.status(200).json({
     data: response
   })
+}
+
+export async function loginWithGoogleCallback(req: Request, res: Response) {
+  try {
+    const user = req.user as User & { role: Role; unit: Unit }
+
+    await loginGoogleAuth(user, res)
+    // ============================
+    const ip = requestIp.getClientIp(req)
+    const userAgent = req.get('User-Agent') || 'unknown'
+    logger.info(`Google login successful for user: ${user.email}. IP: ${ip}, User-Agent: ${userAgent}`)
+    if (user.role.name === 'Admin') {
+      res.redirect(`${process.env.FRONTEND_URL}/admin`)
+    } else {
+      res.redirect(`${process.env.FRONTEND_URL}/user`)
+    }
+  } catch (error: any) {
+    logger.error('Google login callback error:', error)
+    res.redirect(`${process.env.FRONTEND_URL}/login?error=google_login_failed`)
+  }
 }
 
 // 3. TOKEN EXCHANGE (POST /oauth/token) - Back Channel

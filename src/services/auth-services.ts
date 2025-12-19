@@ -6,6 +6,7 @@ import { createSessionToken, hashToken } from '../utils/token'
 import { CSRF_ENABLED, NODE_ENV, REFRESH_TOKEN_EXPIRES_SECONDS } from '../config'
 import { signAccessToken, signPortalSession, verifyPortalToken } from '../utils/jwt'
 import { UserAuthorizeRequest, UserLoginRequest, UserTokenExchangeRequest } from '../models/auth-model'
+import { User } from '@prisma/client'
 
 // 1. LOGIN AUTHENTICATION SERVICE
 export const loginAuth = async (request: UserLoginRequest, res: Response) => {
@@ -93,6 +94,77 @@ export const loginAuth = async (request: UserLoginRequest, res: Response) => {
       role: user.role.name,
       unit: user.unit.code,
       division: user.division.name
+    }
+  }
+}
+
+// 1. LOGIN GOOGLE AUTHENTICATION SERVICE
+export const loginGoogleAuth = async (user: User, res: Response) => {
+  const users = await prismaClient.user.findUnique({
+    where: {
+      email: user.email
+    },
+    include: {
+      role: true,
+      unit: true,
+      division: true
+    }
+  })
+  if (!users) throw new ResponseError(401, 'Invalid email or password')
+
+  const role = users.role.name
+  const unit = users.unit.name
+  const division = users.division.name
+  const accessToken = signAccessToken({ userId: users.id, role, unit, division })
+
+  const refreshPlain = createSessionToken()
+  const tokenHash = hashToken(refreshPlain)
+  const expiresAt = new Date(Date.now() + REFRESH_EXPIRES_SECONDS * 1000)
+  // Ensure old tokens are cleared to avoid piling up
+  await resetUserRefreshTokens(users.id)
+  await prismaClient.refreshToken.create({
+    data: { userId: users.id, tokenHash, expiresAt }
+  })
+  // Set csrf token if enabled
+  const csrfEnabled = CSRF_ENABLED
+  const csrfToken = csrfEnabled ? createSessionToken().slice(0, 32) : null
+
+  //Set Cookies refresh token
+  res.cookie('refresh_token', refreshPlain, cookieOptions())
+  // Set user role cookie
+  res.cookie('user_role', role, nonHttpOnlyCookieOptions())
+  // Set user unit cookie
+  res.cookie('user_unit', unit, nonHttpOnlyCookieOptions())
+  // Set user division cookie
+  res.cookie('user_division', division, nonHttpOnlyCookieOptions())
+  // Set CSRF token cookie if enabled
+  if (csrfEnabled && csrfToken) {
+    res.cookie(
+      'csrf_token',
+      csrfToken,
+      withDomain({
+        httpOnly: false,
+        secure: NODE_ENV === 'production',
+        sameSite: 'strict' as const,
+        maxAge: REFRESH_EXPIRES_SECONDS * 1000,
+        path: '/'
+      })
+    )
+  }
+  // Portal session cookie for SSO
+  const PortalSessiontoken = signPortalSession({ userId: user.id, role, unit, division })
+  res.cookie('portal_session', PortalSessiontoken, cookieOptions())
+
+  return {
+    portal_session: PortalSessiontoken,
+    access_token: accessToken,
+    user: {
+      id: users.id,
+      email: users.email,
+      name: users.name,
+      role: users.role.name,
+      unit: users.unit.code,
+      division: users.division.name
     }
   }
 }
@@ -325,25 +397,36 @@ function withDomain<T extends Record<string, any>>(opts: T): T & { domain?: stri
 
 function cookieOptions() {
   // Host-scope or domain-scope depending on COOKIE_DOMAIN
-  return withDomain({
-    // return {
+  // return withDomain({
+  return {
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production',
     sameSite: 'lax' as const,
     maxAge: REFRESH_EXPIRES_SECONDS * 1000,
     path: '/'
-    // }
+  }
+  // })
+}
+
+function cookieOptionsGoogleCallback() {
+  // Cross-site redirect callback requires SameSite=None and secure
+  return withDomain({
+    httpOnly: true,
+    secure: true,
+    sameSite: 'none' as const,
+    maxAge: REFRESH_EXPIRES_SECONDS * 1000,
+    path: '/'
   })
 }
 
 function nonHttpOnlyCookieOptions() {
-  return withDomain({
-    // return {
+  // return withDomain({
+  return {
     httpOnly: false,
     secure: process.env.NODE_ENV === 'production',
     sameSite: 'lax' as const,
     maxAge: REFRESH_EXPIRES_SECONDS * 1000,
     path: '/'
-    // }
-  })
+  }
+  // })
 }
