@@ -397,15 +397,15 @@ function withDomain<T extends Record<string, any>>(opts: T): T & { domain?: stri
 
 function cookieOptions() {
   // Host-scope or domain-scope depending on COOKIE_DOMAIN
-  // return withDomain({
-  return {
+  return withDomain({
+    // return {
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production',
     sameSite: 'lax' as const,
     maxAge: REFRESH_EXPIRES_SECONDS * 1000,
     path: '/'
-  }
-  // })
+    // }
+  })
 }
 
 function cookieOptionsGoogleCallback() {
